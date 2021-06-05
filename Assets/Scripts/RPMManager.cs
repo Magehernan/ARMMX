@@ -12,6 +12,7 @@ public class RPMManager : MonoBehaviour {
 
 	private void Awake() {
 		slider.onValueChanged.AddListener(OnRPMChange);
+		OnRPMChange(slider.value);
 	}
 
 

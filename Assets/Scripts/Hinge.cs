@@ -4,11 +4,15 @@ public class Hinge : MonoBehaviour {
 	[SerializeField]
 	private Transform originTransform;
 	[SerializeField]
+	private Optional<Transform> centerRotation;
+	[SerializeField]
+	private int axis;
+	[SerializeField]
+	private Vector3 rotationMask;
+	[SerializeField]
+	private Transform extremeTransform;
+	[SerializeField]
 	private Optional<Vector3> eulerRotation;
-	[SerializeField]
-	private Vector3 minAngle;
-	[SerializeField]
-	private Vector3 maxAngle;
 
 	private Transform myTransform;
 
@@ -17,10 +21,14 @@ public class Hinge : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (eulerRotation) {
-			myTransform.eulerAngles = eulerRotation + Vector3.LerpUnclamped(maxAngle, minAngle, Mathf.Sin(originTransform.eulerAngles.z * Mathf.Deg2Rad));
-		}
 
-		myTransform.position = originTransform.position;
+		Vector3 position = originTransform.position;
+		myTransform.position = position;
+		if (centerRotation) {
+			myTransform.eulerAngles = eulerRotation - rotationMask * (
+				Mathf.Acos((position[axis] - centerRotation.Value.position[axis]) / (extremeTransform.position - position).magnitude)
+				* Mathf.Rad2Deg
+			);
+		}
 	}
 }

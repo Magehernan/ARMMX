@@ -40,7 +40,7 @@ public class ChainMover : MonoBehaviour {
 
 		lastPosition = myTransform.position;
 	}
-	private void OnTriggerStay(Collider other) {
+	private void OnTriggerEnter(Collider other) {
 		if (!isActive || current != null) {
 			return;
 		}

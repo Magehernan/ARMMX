@@ -17,9 +17,7 @@ public class Chain : MonoBehaviour {
 	[SerializeField]
 	private bool isActive = false;
 
-
-
-	private void Update() {
+	private void FixedUpdate() {
 		if (!isActive) {
 			return;
 		}

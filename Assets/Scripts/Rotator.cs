@@ -11,7 +11,7 @@ public class Rotator : MonoBehaviour {
 	[SerializeField]
 	private Optional<Axis> axis;
 
-	private void Update() {
+	private void FixedUpdate() {
 		if (gear) {
 			gear.Value.Rotate(rpm / 60f * Time.deltaTime, 1);
 		}

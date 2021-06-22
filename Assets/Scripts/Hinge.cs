@@ -6,7 +6,7 @@ public class Hinge : MonoBehaviour {
 	[SerializeField]
 	private Optional<Transform> centerRotation;
 	[SerializeField]
-	private int axis;
+	private AxisTypes axis;
 	[SerializeField]
 	private Vector3 rotationMask;
 	[SerializeField]
@@ -20,13 +20,13 @@ public class Hinge : MonoBehaviour {
 		myTransform = transform;
 	}
 
-	private void Update() {
-
+	private void FixedUpdate() {
 		Vector3 position = originTransform.position;
 		myTransform.position = position;
 		if (centerRotation) {
+			int currentAxis = (int)axis;
 			myTransform.eulerAngles = eulerRotation - rotationMask * (
-				Mathf.Acos((position[axis] - centerRotation.Value.position[axis]) / (extremeTransform.position - position).magnitude)
+				Mathf.Acos((position[currentAxis] - centerRotation.Value.position[currentAxis]) / (extremeTransform.position - position).magnitude)
 				* Mathf.Rad2Deg
 			);
 		}

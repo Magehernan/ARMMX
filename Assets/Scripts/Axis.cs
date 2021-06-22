@@ -9,7 +9,7 @@ public class Axis : MonoBehaviour {
 
 	public void Rotate(float originRotation) {
 		transform.Rotate(axisRotation * originRotation);
-		
+
 		foreach (Gear gear in gears) {
 			gear.AxisRotate(originRotation);
 		}
